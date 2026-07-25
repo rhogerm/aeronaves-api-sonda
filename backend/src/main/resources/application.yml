@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
     name: aeronaves-api
 
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:aeronaves_db}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:aeronaves_db}?sslmode=${DB_SSLMODE:disable}
     username: ${DB_USER:aeronaves}
     password: ${DB_PASSWORD:aeronaves}
     driver-class-name: org.postgresql.Driver
