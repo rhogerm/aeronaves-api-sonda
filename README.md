@@ -4,8 +4,8 @@ API RESTful em Java (Spring Boot / Spring MVC + JPA) para cadastro de aeronaves,
 front-end SPA em AngularJS 1.x + Bootstrap, banco de dados PostgreSQL e versionamento
 de schema com Flyway.
 
-Implementado como resposta ao desafio técnico do processo seletivo Sonda VSS (cadastro
-de aeronaves com back-end RESTful, front-end SPA e banco relacional).
+Desenvolvido por Rhoger Miranda (cadastro de aeronaves com back-end RESTful, front-end
+SPA e banco relacional).
 
 ## Demo ao vivo
 

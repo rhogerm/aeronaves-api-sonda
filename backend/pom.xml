@@ -15,7 +15,7 @@
     <artifactId>aeronaves-api</artifactId>
     <version>1.0.0</version>
     <name>aeronaves-api</name>
-    <description>API RESTful para cadastro e gestao de aeronaves - Teste tecnico Sonda VSS</description>
+    <description>API RESTful para cadastro e gestao de aeronaves - Desenvolvido por Rhoger Miranda</description>
 
     <properties>
         <java.version>17</java.version>

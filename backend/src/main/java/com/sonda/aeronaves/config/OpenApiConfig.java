@@ -12,7 +12,7 @@ public class OpenApiConfig {
     public OpenAPI aeronavesOpenApi() {
         return new OpenAPI().info(new Info()
                 .title("API de Gestao de Aeronaves")
-                .description("Teste tecnico - Processo Seletivo Sonda VSS")
+                .description("Desenvolvido por Rhoger Miranda")
                 .version("1.0.0"));
     }
 }
