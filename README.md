@@ -174,7 +174,8 @@ mvnw.cmd spring-boot:run      # Windows
 ```
 
 Na primeira execução, o Flyway cria automaticamente o schema (`V1`) e uma massa de dados
-de exemplo (`V2`) para já demonstrar as estatísticas funcionando. A API sobe em
+de exemplo com 39 aeronaves (`V2` e `V3`), cobrindo 8 décadas de fabricação e 12
+fabricantes distintos, já demonstrando as estatísticas funcionando. A API sobe em
 `http://localhost:8080`.
 
 - Swagger UI: `http://localhost:8080/swagger-ui.html`

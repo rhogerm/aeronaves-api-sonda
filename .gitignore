@@ -7,6 +7,7 @@ backend/target/
 .idea/
 *.iml
 .vscode/
+.claude/
 
 # OS
 Thumbs.db
