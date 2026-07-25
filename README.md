@@ -1,4 +1,4 @@
-# Gestão de Aeronaves — Teste Técnico Sonda VSS
+# Gestão de Aeronaves
 
 API RESTful em Java (Spring Boot / Spring MVC + JPA) para cadastro de aeronaves, com
 front-end SPA em AngularJS 1.x + Bootstrap, banco de dados PostgreSQL e versionamento
