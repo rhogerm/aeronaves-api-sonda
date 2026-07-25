@@ -7,8 +7,29 @@ de schema com Flyway.
 Implementado como resposta ao desafio técnico do processo seletivo Sonda VSS (cadastro
 de aeronaves com back-end RESTful, front-end SPA e banco relacional).
 
+## Demo ao vivo
+
+| | |
+|---|---|
+| **Front-end (SPA)** | https://aeronaves-api-sonda.vercel.app |
+| **Back-end (API)**  | https://aeronaves-api.onrender.com/api/aeronaves |
+| **Swagger UI**       | https://aeronaves-api.onrender.com/swagger-ui.html |
+| **Health check**     | https://aeronaves-api.onrender.com/actuator/health |
+
+Infraestrutura usada (100% free tier):
+
+- **Front-end**: [Vercel](https://vercel.com) — hospedagem estática do SPA.
+- **Back-end**: [Render](https://render.com) — web service via Docker (`render.yaml`).
+- **Banco de dados**: [Neon](https://neon.tech) — PostgreSQL serverless gratuito.
+
+> ⚠️ **Nota sobre cold start**: o plano gratuito do Render "dorme" o serviço após ~15
+> minutos sem requisições. A primeira chamada após um período ocioso pode levar de
+> 30 a 50 segundos para responder enquanto o container reinicia — chamadas seguintes
+> são instantâneas. Isso é uma limitação do tier gratuito, não da aplicação em si.
+
 ## Sumário
 
+- [Demo ao vivo](#demo-ao-vivo)
 - [Arquitetura](#arquitetura)
 - [Stack tecnológica](#stack-tecnológica)
 - [Regras de negócio implementadas](#regras-de-negócio-implementadas)
@@ -25,8 +46,25 @@ O projeto é dividido em duas aplicações independentes, comunicando-se via HTT
 api-sonda/
 ├── backend/          API RESTful (Spring Boot 3 + Java 17 + JPA + PostgreSQL)
 ├── frontend/          SPA estático (AngularJS 1.x + Bootstrap 5, sem build/transpilação)
-└── docker-compose.yml Sobe apenas o PostgreSQL (backend roda via Maven/JVM local)
+├── docker-compose.yml Sobe apenas o PostgreSQL (backend roda via Maven/JVM local)
+└── render.yaml        Blueprint de deploy do backend no Render (produção)
 ```
+
+### Topologia em produção
+
+A demo ao vivo usa três serviços gratuitos independentes, comunicando-se pela internet
+da mesma forma que em desenvolvimento local (HTTP/JSON + CORS):
+
+```
+Vercel (frontend estático)  →  Render (API Spring Boot, via Docker)  →  Neon (Postgres serverless)
+```
+
+- O **Vercel** apenas serve os arquivos estáticos de `frontend/`; `app.module.js` detecta
+  se está rodando em `localhost` ou em produção e aponta para a API correspondente.
+- O **Render** builda a imagem a partir de `backend/Dockerfile` (definido em `render.yaml`)
+  e injeta as credenciais do banco via variáveis de ambiente (nunca commitadas).
+- O **Neon** fornece o Postgres gerenciado; a conexão exige SSL (`DB_SSLMODE=require`),
+  diferente do Postgres local via Docker (`DB_SSLMODE=disable` por padrão).
 
 ### Back-end — camadas e design patterns
 
