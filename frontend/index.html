@@ -140,25 +140,45 @@
                 <table class="table table-striped table-hover align-middle bg-white shadow-sm">
                     <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Ano</th>
-                        <th>Vendido</th>
-                        <th>Cadastrado em</th>
+                        <!-- Cabecalhos clicaveis para ordenacao -->
+                        <th ng-click="vm.ordenacaoColuna = 'id'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            ID
+                            <span ng-show="vm.ordenacaoColuna == 'id'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
+                        <th ng-click="vm.ordenacaoColuna = 'marca'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            Marca
+                            <span ng-show="vm.ordenacaoColuna == 'marca'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
+                        <th ng-click="vm.ordenacaoColuna = 'nome'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            Modelo
+                            <span ng-show="vm.ordenacaoColuna == 'nome'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
+                        <th ng-click="vm.ordenacaoColuna = 'ano'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            Ano
+                            <span ng-show="vm.ordenacaoColuna == 'ano'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
+                        <th ng-click="vm.ordenacaoColuna = 'vendido'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            Vendido
+                            <span ng-show="vm.ordenacaoColuna == 'vendido'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
+                        <th ng-click="vm.ordenacaoColuna = 'created'; vm.ordenacaoInversa = !vm.ordenacaoInversa" style="cursor: pointer; user-select: none;">
+                            Cadastrado em
+                            <span ng-show="vm.ordenacaoColuna == 'created'">{{ vm.ordenacaoInversa ? '▲' : '▼' }}</span>
+                        </th>
                         <th class="text-center">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="a in vm.aeronaves track by a.id">
+                    <!-- O ng-repeat agora escuta as variaveis do controlador para ordenar -->
+                    <tr ng-repeat="a in vm.aeronaves | orderBy:vm.ordenacaoColuna:vm.ordenacaoInversa track by a.id">
                         <td>{{ a.id }}</td>
                         <td>{{ a.marca }}</td>
                         <td>{{ a.nome }}</td>
                         <td>{{ a.ano }}</td>
                         <td>
-                                <span class="badge" ng-class="a.vendido ? 'bg-success' : 'bg-secondary'">
-                                    {{ a.vendido ? 'Sim' : 'Não' }}
-                                </span>
+                            <span class="badge" ng-class="a.vendido ? 'bg-success' : 'bg-secondary'">
+                                {{ a.vendido ? 'Sim' : 'Não' }}
+                            </span>
                         </td>
                         <td class="small text-muted">{{ a.created | date:'dd/MM/yyyy HH:mm' }}</td>
                         <td class="text-center">
@@ -166,8 +186,8 @@
                             <button class="btn btn-sm btn-outline-danger" ng-click="vm.excluir(a)">Excluir</button>
                         </td>
                     </tr>
-                    <tr ng-if="!vm.carregando && !vm.aeronaves.length">
-                        <td colspan="7" class="text-center text-muted py-4">Nenhuma aeronave encontrada.</td>
+                    <tr ng-if="!vm.aeronaves.length">
+                        <td colspan="7" class="text-center text-muted py-3">Nenhuma aeronave encontrada.</td>
                     </tr>
                     </tbody>
                 </table>

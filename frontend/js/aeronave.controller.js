@@ -28,6 +28,9 @@
         vm.mensagemErro = null;
         vm.mensagemSucesso = null;
 
+        vm.ordenacaoColuna = 'id';   // Coluna padrão inicial
+        vm.ordenacaoInversa = false; // Crescente por padrão
+
         vm.salvar = salvar;
         vm.editar = editar;
         vm.cancelarEdicao = cancelarEdicao;
