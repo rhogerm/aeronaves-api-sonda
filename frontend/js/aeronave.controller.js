@@ -9,13 +9,14 @@
     function AeronaveController(AeronaveService) {
         var vm = this;
 
-        // Espelha a whitelist de fabricantes definida no backend
-        // (com.sonda.aeronaves.model.Fabricante) para exibir as opcoes no select.
+        // Espelha a whitelist de fabricantes definida no backend e ordena alfabeticamente
         vm.fabricantes = [
             'Embraer', 'Boeing', 'Airbus', 'Bombardier', 'Cessna', 'ATR',
             'Gulfstream', 'Dassault', 'Lockheed Martin', 'Piper',
             'Textron Aviation', 'Saab', 'Antonov', 'De Havilland'
-        ];
+        ].sort(function (a, b) {
+            return a.localeCompare(b);
+        });
 
         vm.aeronaves = [];
         vm.stats = {naoVendidas: {}, porDecada: [], porFabricante: [], ultimaSemana: []};
